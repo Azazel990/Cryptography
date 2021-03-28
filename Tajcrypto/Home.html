@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <title>Home</title>
+
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+        }
+        h1
+        {
+            position: absolute;
+            font-family: Montserrat;
+            font-size: 7.5em;
+            top: 30%;
+            left: 42%;
+            letter-spacing: 7px;
+            animation: title1 4s;
+            animation-fill-mode: forwards;   
+            opacity: 0;         
+        }
+        @keyframes title1 
+        {
+            0%
+            {
+                top: 30%;
+                left: 35%;
+                opacity: 0;
+            }
+            15%
+            {
+                top: 30%;
+                left: 42%;
+                opacity: 1;
+            }
+            90%
+            {
+                top: 30%;
+                left: 42%;
+                opacity: 1;
+                font-size: 7.5em;
+            }
+            100%
+            {
+                top: 5%;
+                left: 45%;
+                opacity: 1;
+                font-size: 3.5em;
+            }
+        }
+
+        .list
+        {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            height: 500px;
+            width: 350px;
+            top: 20%;
+            left: 36%;
+            /* background-color: #777; */
+        }
+        a
+        {
+            text-decoration: none;
+            height:300px;
+            width: 100%;
+            margin: 0;
+            background: #1D201F;
+        }
+        ul
+        {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            left: 0%;
+            margin: 0;
+            padding: 0;
+            transition: 0.2s; 
+            animation: slide 0.2s;
+            animation-fill-mode: forwards;
+            opacity: 0;
+        }
+      
+        li
+        {
+            position: relative;
+            left: 0%;
+            height: 25px;
+            width: 100%;
+            list-style: none;
+            background: #1D201F;
+            margin-top: 15px;
+            padding: 15px;
+            color: #fff;
+            font-family: Lato;
+           transition: 0.2s;
+        }
+        @keyframes slide 
+        {
+            0%
+            {
+                left: -10%;
+                opacity: 0;
+            }
+            100%
+            {
+                left: 0%;
+                opacity: 1;
+            }
+        }
+        
+        ul:nth-child(1)
+        {
+            animation-delay: 4.0s;
+        }
+        ul:nth-child(2)
+        {
+            animation-delay: 4.2s;
+        }
+        ul:nth-child(3)
+        {
+            animation-delay: 4.4s;
+        }
+        ul:nth-child(4)
+        {
+            animation-delay: 4.6s;
+        }
+        ul:nth-child(5)
+        {
+            animation-delay: 4.8s;
+        }
+        ul:nth-child(6)
+        {
+            animation-delay: 5.0s;
+        }
+        ul:nth-child(7)
+        {
+            animation-delay: 5.2s;
+        }
+        ul:nth-child(8)
+        {
+            animation-delay: 5.4s;
+        }
+       
+        ul li:hover
+        {
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.7) , 10px 10px 20px rgba(0,0,0,0.7);
+            transition: 0.2s;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>TAJ</h1>
+
+    <div class="list">
+
+        <ul>
+            <a href="sources/caesar.html"><li>Casear Cipher</li></a>
+            <a href="sources/OneTimePad Cipher.html"><li>OneTimePad Cipher</li></a>
+            <a href="sources/monoalphabetic.html"><li>Monoalphabetic Cipher</li></a>
+            <a href="sources/polyalphabetic.html"><li>Polyalphabetic Cipher</li></a>
+            <a href="sources/ktrans.html"><li>Keyless Transposition Cipher</li></a>
+            <a href="sources/newtrans1.html"><li>Columnar Cipher</li></a>
+            <a href="sources/playfair.html"><li>Playfair Cipher</li></a>
+            <a href="sources/hill.html"><li>Hill Cipher</li></a>
+        </ul>
+    </div>
+</body>
+</html>
