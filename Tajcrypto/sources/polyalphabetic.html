@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <title>Polyalphabetic</title>
+    <style>
+        body
+        {
+            background: #f6f6f6;
+            
+        }
+        .box
+        {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            height: 300px;
+            width: 650px;
+            background: #C0C4C3;
+        }
+        h1
+        {
+            text-align: center;
+            font-size: 3.3em;
+            font-family: Montserrat;
+            letter-spacing: 4px;
+        }
+        h2
+        {
+            position: relative;
+            text-align: center;
+            font-family: lato;
+            letter-spacing: 2px;
+            background: #1D201F;
+            color : #fff;
+            margin-top: -2px;
+            padding: 15px;
+        }
+        form
+        {
+            /* border: 2px solid black; */
+            height: 50%;
+            top: 50%;
+            padding: 25px;
+        }
+        input
+        {
+            position: relative;
+            margin-top : 15px;
+            margin-left : 25px;
+            width: 74%;
+            background: transparent;
+            border: 0;
+            border-bottom: 2px solid black;
+            outline: none;
+            font-weight: bold;
+        }
+        label
+        {
+            font-family: lato;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+
+        button
+        {
+            position: absolute;
+            padding: 10px;
+            width: 90%;
+            background: #1D201F;
+            color: #f6f6f6;
+            font-family: lato;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.5),0px 0px 20px rgba(0,0,0,0.5);
+            cursor: pointer;
+            outline: none;   
+            left: 4%;
+            top: 65%;
+            letter-spacing: 3px;
+        }
+        .rmore
+        {
+            height: 160px;
+            width: 630px;
+            position: relative;
+            z-index: -2;
+            top: -45%;
+            left: 0%;
+            padding: 10px;
+            font-family: lato;
+            word-wrap: inherit;
+            background: #222;
+            color: #fff;
+            opacity: 0;
+        }
+        a
+        {
+            position: relative;
+           color: #000;
+           left: 42%;
+           top: 20%;
+           text-decoration: none;
+           font-family: Montserrat;
+           transition: 0.3s;
+        }
+        .readmore
+        {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #C0C4C3;
+            transition: 0.3s;
+            z-index: inherit;
+        }
+        .readmore:hover{
+            background: #222;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .readmore:hover a
+        {
+            color: #fff;
+            transition: 0.3s;
+        }
+    </style>
+    <script>
+      var i,j,i2,i1,c,p=0,q,r,k1,k2,f;
+      var str = "";
+      var cipher = "";
+      var ans = [];
+      var key = [];
+      var ptext = [];
+      var ptext1= "";
+      var r = "";
+      var k = "";
+      var arr1 = new Array(26);
+        j = 0;
+        function setup()
+        {
+            str = document.getElementById("one").value;
+            str = str.toUpperCase();
+            
+            //Creating a 2D array
+           for(i=0;i < 26;i++)
+           {
+                arr1[i] = [];
+           }
+
+           //Creating aplhabet chart
+           for(i=0;i<26;i++)
+           {
+                for(j=0,k1=65;j<26;j++)
+                {
+                    if(f==0)
+                    {
+                        k1 = k1 + i;
+                        f=1;
+                    }
+                    if(k1 > 90)
+                    {
+                        k1 = k1 - 26;
+                    }
+                    arr1[i][j] =  String.fromCharCode(k1);
+                    // console.log("i="+i+" "+"j="+j+" "+"k="+k+" "+"arr = "+arr1[i][j]);
+                    k1++; 
+                }
+                f=0;
+           }
+
+           //Generating the key 
+           for(i=0;i<3;i++)
+           {
+                key[i] =  String.fromCharCode(Math.floor(Math.random() * (90 - 65)) + 65);
+                console.log("key = "+key[i]);      
+           } 
+           
+           //Generating Plain Text(extended Key)
+           for(i=0;i<str.length;i++)
+           {
+               if(j > 2)
+               {
+                    j = 0;
+               }
+                ptext[i] = key[j];
+                j++;
+                console.log(ptext[i]);
+           }
+           encryption();
+        }
+
+        function encryption()
+        {
+
+
+           for(c=0;c<str.length;c++)
+           { 
+               
+                //getting the indexes
+               
+                k = ptext[c];
+                i1 = k.charCodeAt(0) - 65;
+                console.log("i1 = "+i1);
+                k = str[c];
+                i2 = k.charCodeAt(0) - 65;
+                console.log("i2 = "+i2);
+                
+                for(i=0;i<26;i++)
+                {
+                    for(j=0;j<26;j++)
+                    {
+                        if(i1==i&&i2==j)
+                        {
+                            ans[c] = arr1[i][j];
+                            console.log("ans = "+ans[c]);
+                        }
+                    }
+                }
+            }
+            cipher = ans.toString();
+            for(i=0;i<cipher.length;i++)
+            {
+                cipher = cipher.replace(",","");
+            }
+            document.getElementById("two").value = cipher;
+        }
+function expand()
+{
+
+    var x = document.getElementById('box1');
+    var y = document.getElementById('rm');
+    var z = document.getElementById('three');
+    var v = document.getElementById('four');
+    var w = document.getElementById('five');
+    if(r%2==0)
+    {
+        x.style.height = '500px';
+        x.style.transition = '0.2s';
+        y.innerHTML = "Show Less";
+        y.style.color = '#fff';
+        z.style.top = '40%';
+        z.style.transition = '0.2s';
+        v.style.transition = '0.2s';
+        v.style.background = '#222';
+        w.style.opacity  = '1';
+        w.style.transition = '0.2s';
+        w.style.transitionDelay = '0.150s'
+        w.style.top = '-19%';
+        r++;
+    }
+    else
+    {
+        x.style.height = '300px';
+        x.style.transition = '0.2s';
+        y.innerHTML = "Read More";
+        y.style.color = '#000';
+        z.style.top = '65%';
+        z.style.transition = '0.2s';
+        v.style.transition = '0.2s';
+        v.style.background = '';
+        w.style.opacity  = '0';
+        w.style.transition = '0.2s';
+        w.style.top = '-45%';
+        r++;
+    }
+}
+function col1()
+{
+    var x = document.getElementById('rm');
+    x.style.color = '#fff';
+}
+function col2()
+{
+    var x = document.getElementById('rm');
+    x.style.color = '#000';
+}
+</script>
+</head>
+<body>
+    <h1>TAJ</h1>
+    <div class="box" id="box1">
+        <h2>Polyalphabetic Cipher</h2>
+        <form action="">
+             
+          <label for=""> Plain-Text : </label><input type="text" name="ptext" id="one" style="margin-left: 42px; "><br>    
+           <label for="">Cipher-Text :</label> <input type="text" name="ctext" id="two">   
+           <br>
+          
+        </form>
+      <button id="three" onclick="setup()">Encrypt</button>
+      <div class="readmore" id="four" onclick="expand()" >
+        <a href="#"  id="rm"  >Read More</a>
+
+      </div>
+        <div class="rmore" id="five">
+            <p> 
+                A polyalphabetic cipher is any cipher based on substitution, using multiple substitution alphabets .The encryption of the original text is done using the Vigenère square or Vigenère table.
+
+                The table consists of the alphabets written out 26 times in different rows, each alphabet shifted cyclically to the left compared to the previous alphabet, corresponding to the 26 possible Caesar Ciphers.
+                At different points in the encryption process, the cipher uses a different alphabet from one of the rows.
+                The alphabet used at each point depends on a repeating keyword.
+            </p>
+        </div>
+    </div>
+    
+</body>
+</html>
+</body>
+</html>

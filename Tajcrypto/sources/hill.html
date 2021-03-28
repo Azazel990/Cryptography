@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <title>Hill Cipher</title>
+    <style>
+        body
+        {
+            background: #f6f6f6;
+            
+        }
+        .box
+        {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            height: 350px;
+            width: 650px;
+            background: #C0C4C3;
+        }
+        h1
+        {
+            text-align: center;
+            font-size: 3.3em;
+            font-family: Montserrat;
+            letter-spacing: 4px;
+        }
+        h2
+        {
+            position: relative;
+            text-align: center;
+            font-family: lato;
+            letter-spacing: 2px;
+            background: #1D201F;
+            color : #fff;
+            margin-top: -2px;
+            padding: 15px;
+        }
+        form
+        {
+            /* border: 2px solid black; */
+            height: 50%;
+            top: 50%;
+            padding: 25px;
+        }
+        input
+        {
+            position: relative;
+            margin-top : 15px;
+            margin-left : 25px;
+            width: 74%;
+            background: transparent;
+            border: 0;
+            border-bottom: 2px solid black;
+            outline: none;
+            font-weight: bold;
+        }
+        label
+        {
+            font-family: lato;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+
+        button
+        {
+            position: absolute;
+            padding: 10px;
+            width: 90%;
+            background: #1D201F;
+            color: #f6f6f6;
+            font-family: lato;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.5),0px 0px 20px rgba(0,0,0,0.5);
+            cursor: pointer;
+            outline: none;   
+            left: 4%;
+            top: 70.1%;
+            letter-spacing: 3px;
+        }
+        .rmore
+        {
+            height: 160px;
+            width: 630px;
+            position: relative;
+            z-index: -2;
+            top: -45%;
+            left: 0%;
+            padding: 10px;
+            font-family: lato;
+            word-wrap: inherit;
+            background: #222;
+            color: #fff;
+            opacity: 0;
+        }
+        a
+        {
+            position: relative;
+           color: #000;
+           left: 42%;
+           top: 20%;
+           text-decoration: none;
+           font-family: Montserrat;
+           transition: 0.3s;
+        }
+        .readmore
+        {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #C0C4C3;
+            transition: 0.3s;
+            z-index: inherit;
+        }
+        .readmore:hover{
+            background: #222;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .readmore:hover a
+        {
+            color: #fff;
+            transition: 0.3s;
+        }
+    </style>
+    <script>
+     var r = "";
+    var i,j,k,sum=0,p,q,col=0;
+    var temp = "";
+    var str = "abcd";
+    var ans = new Array();
+    var key = "abcdefghi";
+    var arr1 = new Array();
+    var arr2 = new Array();
+    var cipher ="";
+
+function setup()
+{
+    
+    str = document.getElementById("one").value;
+    str = str.toUpperCase();
+    key = document.getElementById("keygen").value;
+    key = key.toUpperCase();
+
+    //Verfying 
+    if(str.length%3==0&&str.length!=3)
+    {
+        for(i=0;i < str.length/3;i++)
+        {
+            arr1[i] = [];
+        }
+    }
+    else if(str.length==3)
+    {
+        for(i=0;i < 3;i++)
+        {
+            arr1[i] = [];
+        }
+    }
+    else if(str.length%2==0&&str.length!=2)
+    {
+        for(i=0;i < str.length/2;i++)
+        {
+            arr1[i] = [];
+        }
+    }
+    else if(str.length==2)
+    {
+        for(i=0;i < 2;i++)
+        {
+            arr1[i] = [];
+        }
+    }
+    else
+    {
+        alert("Invalid Plaintext Length");
+    }
+    
+   
+    //key array setup
+
+    if(key.length%3==0&&key.length!=3)
+    {
+        for(i=0;i < key.length/3;i++)
+        {
+            arr2[i] = [];
+            
+        }
+        
+    }
+    else if(key.length==3)
+    {
+        for(i=0;i < 3;i++)
+        {
+            arr2[i] = [];
+        }
+    }
+    else if(key.length%2==0&&key.length!=2)
+    {
+        for(i=0;i < key.length/2;i++)
+        {
+            arr2[i] = [];
+        }
+    }
+    else if(key.length==2)
+    {
+        for(i=0;i < 2;i++)
+        {
+            arr2[i] = [];
+        }
+    }
+    //Filling the pi array
+    if(str.length%2==0)
+    {
+        c = 0;
+        for(i=0;i<2;i++)
+        {
+            for(j=0;j<str.length/2;j++)
+            {
+                arr1[i][j] = str.charCodeAt(c)-65;
+                c++;
+            }
+        }
+    }
+
+    else if(str.length%3==0&&str.length%2!=0)
+    {
+        c = 0;
+        for(i=0;i<3;i++)
+        {
+            for(j=0;j<str.length/3;j++)
+            {
+                arr1[i][j] = str.charCodeAt(c)-65;
+                c++;
+            }
+        }
+    }
+
+    //keygenerator function
+
+    c = 0;
+    if(key.length%2==0)
+    {
+        for(i=0;i<2;i++)
+        {
+            for(j=0;j<key.length/2;j++)
+            {
+                arr2[i][j] = key.charCodeAt(c)-65;
+                c++;
+            }
+        }
+    }
+    else if(key.length%3==0)
+    {
+        for(i=0;i<3;i++)
+        {
+            for(j=0;j<key.length/3;j++)
+            {
+                arr2[i][j] = key.charCodeAt(c)-65;
+                c++;
+            }
+        }   
+    }
+
+    verify();
+    
+}
+
+
+
+function verify()
+{
+    console.log("arr2 = "+arr2.length);
+    console.log("arr1.leght = "+arr1.length);
+    if(arr1.length!=arr2.length)
+    {
+        alert("Invalid Inputs");
+    }
+  else
+  {
+    show();
+  }
+}
+
+function show()
+{
+    if(str.length%2==0)
+    {
+        for(i=0;i<2;i++)
+        {
+            for(j=0;j<str.length/2;j++)
+            {
+                console.log("i ="+i+" "+"j= "+j+" "+"arr = "+arr1[i][j]);
+            }
+        }
+    }
+    else if(str.length%3==0)
+    {
+        for(i=0;i<3;i++)
+        {
+            for(j=0;j<str.length/3;j++)
+            {
+                console.log("i ="+i+" "+"j= "+j+" "+"arr = "+arr1[i][j]);
+            }
+        }
+    }
+
+    console.log("KEY");
+    if(key.length%2==0)
+    {
+        for(i=0;i<2;i++)
+        {
+            for(j=0;j<key.length/2;j++)
+            {
+                console.log("i ="+i+" "+"j= "+j+" "+"arr = "+arr2[i][j]);
+            }
+        }
+    }
+    else if(key.length%3==0)
+    {
+        for(i=0;i<3;i++)
+        {
+            for(j=0;j<key.length/3;j++)
+            {
+                console.log("i ="+i+" "+"j= "+j+" "+"arr = "+arr2[i][j]);
+            }
+        }
+    }
+    encryption();
+}
+
+function encryption()
+{
+    //setting up the answer matrix
+    if(str.length%3==0&&str.length!=3)
+    {
+        for(i=0;i < str.length/3;i++)
+        {
+            ans[i] = [];
+        }
+    }
+    else if(str.length==3)
+    {
+        for(i=0;i < 3;i++)
+        {
+            ans[i] = [];
+        }
+    }
+    else if(str.length%2==0&&str.length!=2)
+    {
+        for(i=0;i < str.length/2;i++)
+        {
+            ans[i] = [];
+        }
+    }
+    else if(str.length==2)
+    {
+        for(i=0;i < 2;i++)
+        {
+            ans[i] = [];
+        }
+    }
+
+    //Encrypting....
+
+    if(str.length==3)
+    {
+        p=0;
+        for(i=0;i<arr1.length;i++)
+        {
+            sum = 0;
+            for(j=0;j<arr1.length;j++)
+            {
+                sum  = sum + arr2[i][j]*arr1[j][0];
+                // console.log(arr2[i][j]+"*"+arr1[j][0]+" = "+ans[j][0]);
+            }
+            ans[p][0] = String.fromCharCode((sum%26)+65);
+            console.log(ans[p][0]);     
+            p++;   
+        }
+    }
+    else if(str.length==2)
+    {
+        p=0;
+        for(i=0;i<arr1.length;i++)
+        {
+            sum = 0;
+            for(j=0;j<arr1.length;j++)
+            {
+                sum  = sum + arr2[i][j]*arr1[j][0];
+                // console.log(arr2[i][j]+"*"+arr1[j][0]+" = "+ans[j][0]);
+            }
+            ans[p][0] = String.fromCharCode((sum%26)+65);
+            console.log(ans[p][0]);     
+            p++;   
+        }   
+    }
+    else if(str.length%2==0&&str.length!=2)
+    {
+        for(i=0;i<arr1.length;i++)
+        {
+            for(j=0;j<arr1.length;j++)
+            {
+                for(k=0;k<arr1.length;k++)
+                {
+                    sum = sum + arr2[i][k]*arr1[k][j];
+                    console.log(arr2[i][k]+"*"+arr1[k][j]+" = "+arr2[i][k]*arr1[k][j]);
+                }
+                ans[i][j] = String.fromCharCode((sum%26)+65);
+                console.log(ans[i][j]);
+                sum=0;
+            } 
+        }   
+    }
+    else if(str.length%3==0&&str.length!=3)
+    {
+        for(i=0;i<arr1.length;i++)
+        {
+            for(j=0;j<arr1.length;j++)
+            {
+                for(k=0;k<arr1.length;k++)
+                {
+                    sum = sum + arr2[i][k]*arr1[k][j];
+                }
+                ans[i][j] = String.fromCharCode((sum%26)+65);
+                console.log(ans[i][j]);
+                sum=0;
+            } 
+        }   
+    }
+
+      //converting 
+      cipher = ans.toString();
+    for(i=0;i<cipher.length;i++)
+    {
+        cipher = cipher.replace(",","");
+    }
+    document.getElementById("two").value = cipher;
+    
+}
+
+
+// setup();
+
+
+function expand()
+{
+
+    var x = document.getElementById('box1');
+    var y = document.getElementById('rm');
+    var z = document.getElementById('three');
+    var v = document.getElementById('four');
+    var w = document.getElementById('five');
+    if(r%2==0)
+    {
+        x.style.height = '550px';
+        x.style.transition = '0.2s';
+        y.innerHTML = "Show Less";
+        y.style.color = '#fff';
+        z.style.top = '45%';
+        z.style.transition = '0.2s';
+        v.style.transition = '0.2s';
+        v.style.background = '#222';
+        w.style.opacity  = '1';
+        w.style.transition = '0.2s';
+        w.style.transitionDelay = '0.150s'
+        w.style.top = '-10%';
+        r++;
+    }
+    else
+    {
+        x.style.height = '350px';
+        x.style.transition = '0.2s';
+        y.innerHTML = "Read More";
+        y.style.color = '#000';
+        z.style.top = '70.1%';
+        z.style.transition = '0.2s';
+        v.style.transition = '0.2s';
+        v.style.background = '';
+        w.style.opacity  = '0';
+        w.style.transition = '0.2s';
+        w.style.top = '-45%';
+        r++;
+    }
+}
+function col1()
+{
+    var x = document.getElementById('rm');
+    x.style.color = '#fff';
+}
+function col2()
+{
+    var x = document.getElementById('rm');
+    x.style.color = '#000';
+}
+</script>
+</head>
+<body>
+    <h1>TAJ</h1>
+    <div class="box" id="box1">
+        <h2>Hill Cipher</h2>
+        <form action="">
+             
+          <label for=""> Plain-Text : </label><input type="text" name="ptext" id="one" style="margin-left: 42px; "><br> 
+          <label for="" style="margin-left: 55px;"> Key : </label><input type="text" name="key" id="keygen" style="margin-left: 46px; "> <br>   
+           <label for="">Cipher-Text :</label> <input type="text" name="ctext" id="two">   
+           <br>
+          
+        </form>
+      <button id="three" onclick="setup()">Encrypt</button>
+      <div class="readmore" id="four" onclick="expand()" >
+        <a href="#"  id="rm"  >Read More</a>
+
+      </div>
+        <div class="rmore" id="five">
+            <p> 
+                Hill cipher is a polygraphic substitution cipher based on linear algebra.Each letter is represented by a number modulo 26. Often the simple scheme A = 0, B = 1, …, Z = 25 is used, but this is not an essential feature of the cipher. To encrypt a message, each block of n letters (considered as an n-component vector) is multiplied by an invertible n × n matrix, against modulus 26. To decrypt the message, each block is multiplied by the inverse of the matrix used for encryption.
+
+The matrix used for encryption is the cipher key, and it should be chosen randomly from the set of invertible n × n matrices (modulo 26).
+            </p>
+        </div>
+    </div>
+    
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <title>Keyless Transposition</title>
+    <style>
+        body
+        {
+            background: #f6f6f6;
+            
+        }
+        .box
+        {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            height: 300px;
+            width: 650px;
+            background: #C0C4C3;
+        }
+        h1
+        {
+            text-align: center;
+            font-size: 3.3em;
+            font-family: Montserrat;
+            letter-spacing: 4px;
+        }
+        h2
+        {
+            position: relative;
+            text-align: center;
+            font-family: lato;
+            letter-spacing: 2px;
+            background: #1D201F;
+            color : #fff;
+            margin-top: -2px;
+            padding: 15px;
+        }
+        form
+        {
+            /* border: 2px solid black; */
+            height: 50%;
+            top: 50%;
+            padding: 25px;
+        }
+        input
+        {
+            position: relative;
+            margin-top : 15px;
+            margin-left : 25px;
+            width: 74%;
+            background: transparent;
+            border: 0;
+            border-bottom: 2px solid black;
+            outline: none;
+            font-weight: bold;
+        }
+        label
+        {
+            font-family: lato;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+
+        button
+        {
+            position: absolute;
+            padding: 10px;
+            width: 90%;
+            background: #1D201F;
+            color: #f6f6f6;
+            font-family: lato;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.5),0px 0px 20px rgba(0,0,0,0.5);
+            cursor: pointer;
+            outline: none;   
+            left: 4%;
+            top: 65%;
+            letter-spacing: 3px;
+        }
+        .rmore
+        {
+            height: 160px;
+            width: 630px;
+            position: relative;
+            z-index: -2;
+            top: -45%;
+            left: 0%;
+            padding: 10px;
+            font-family: lato;
+            word-wrap: inherit;
+            background: #222;
+            color: #fff;
+            opacity: 0;
+        }
+        a
+        {
+            position: relative;
+           color: #000;
+           left: 42%;
+           top: 20%;
+           text-decoration: none;
+           font-family: Montserrat;
+           transition: 0.3s;
+        }
+        .readmore
+        {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #C0C4C3;
+            transition: 0.3s;
+            z-index: 2;
+        }
+        .readmore:hover{
+            background: #222;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .readmore:hover a
+        {
+            color: #fff;
+            transition: 0.3s;
+        }
+    </style>
+    <script>
+             
+    var i,k,j;
+    var str = "";
+   var cipher = "";
+   var ans  = [];
+
+        
+function expand()
+{
+    var x = document.getElementById('box1');
+    var y = document.getElementById('rm');
+    var z = document.getElementById('three');
+    var v = document.getElementById('four');
+    var w = document.getElementById('five');
+    if(i%2==0)
+    {
+        x.style.height = '500px';
+        x.style.transition = '0.2s';
+        y.innerHTML = "Show Less";
+        y.style.color = '#fff';
+        z.style.top = '40%';
+        z.style.transition = '0.2s';
+        v.style.transition = '0.2s';
+        v.style.background = '#222';
+        w.style.opacity  = '1';
+        w.style.transition = '0.2s';
+        w.style.transitionDelay = '0.150s';
+        w.style.top = '-19%';
+        i++;
+    }
+    else
+    {
+        x.style.height = '300px';
+        x.style.transition = '0.2s';
+        y.innerHTML = "Read More";
+        y.style.color = '#000';
+        z.style.top = '65%';
+        z.style.transition = '0.2s';
+        v.style.transition = '0.2s';
+        v.style.background = '';
+        w.style.opacity  = '0';
+        w.style.transition = '0.2s';
+        w.style.top = '-45%';
+        i++;
+    }
+}
+function col1()
+{
+    var x = document.getElementById('rm');
+    x.style.color = '#fff';
+}
+function col2()
+{
+    var x = document.getElementById('rm');
+    x.style.color = '#000';
+}
+
+
+
+    function setup()
+    {
+        str = document.getElementById("one").value;
+        str.toUpperCase;
+        encryption();
+    }
+
+    function encryption()
+    {
+        for(i=0;i<str.length;i++)
+        {
+            if(i%2==0)
+            {
+                console.log(str[i]);
+                ans[i] = str[i]; 
+            }
+        }
+        j = i;
+        for(i=0;i<str.length;i++)
+        {
+            if(i%2!=0)
+            {
+                console.log(str[i]);
+                ans[j] = str[i];
+                j++;
+            }
+        }
+        cipher = ans.toString();
+    for(i=0;i<cipher.length;i++)
+     {
+         cipher = cipher.replace(",","");
+            console.log("c = "+cipher[i]);
+            cipher = cipher.replace(",","");
+    }
+    document.getElementById("two").value = cipher;
+}
+
+
+    </script>
+</head>
+<body>
+    <h1>TAJ</h1>
+    <div class="box" id="box1">
+        <h2>Keyless Transposition</h2>
+        <form action="">
+             
+          <label for=""> Plain-Text : </label><input type="text" name="ptext" id="one" style="margin-left: 42px; "><br>    
+           <label for="">Cipher-Text :</label> <input type="text" name="ctext" id="two">   
+           <br>
+          
+        </form>
+      <button id="three" onclick="setup()">Encrypt</button>
+      <div class="readmore" id="four" onclick="expand()" onmouseover="col1()" onmouseout="col2()">
+        <a href="#"  id="rm"  >Read More</a>
+
+      </div>
+        <div class="rmore" id="five">
+            <p>A transposition cipher does not substitute one symbol for another instead it changes the location of the symbols.
+                Keyless Transportation cipher is simple one which is keyless. In first method the text is written into a table column by column and then row by row. In the second method the text is written into the table row by row and then transmitted column by column.
+                Example of a Keyless transposition cipher using first method is rail fence cipher.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

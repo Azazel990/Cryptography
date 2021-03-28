@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <title>Transposition</title>
+    <style>
+        body
+        {
+            background: #f6f6f6;
+            
+        }
+        .box
+        {
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            height: 300px;
+            width: 650px;
+            background: #C0C4C3;
+        }
+        h1
+        {
+            text-align: center;
+            font-size: 3.3em;
+            font-family: Montserrat;
+            letter-spacing: 4px;
+        }
+        h2
+        {
+            position: relative;
+            text-align: center;
+            font-family: lato;
+            letter-spacing: 2px;
+            background: #1D201F;
+            color : #fff;
+            margin-top: -2px;
+            padding: 15px;
+        }
+        form
+        {
+            /* border: 2px solid black; */
+            height: 50%;
+            top: 50%;
+            padding: 25px;
+        }
+        input
+        {
+            position: relative;
+            margin-top : 15px;
+            margin-left : 25px;
+            width: 74%;
+            background: transparent;
+            border: 0;
+            border-bottom: 2px solid black;
+            outline: none;
+            font-weight: bold;
+        }
+        label
+        {
+            font-family: lato;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+
+        button
+        {
+            position: absolute;
+            padding: 10px;
+            width: 90%;
+            background: #1D201F;
+            color: #f6f6f6;
+            font-family: lato;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.5),0px 0px 20px rgba(0,0,0,0.5);
+            cursor: pointer;
+            outline: none;   
+            left: 4%;
+            top: 65%;
+            letter-spacing: 3px;
+        }
+        .rmore
+        {
+            height: 160px;
+            width: 630px;
+            position: relative;
+            z-index: -2;
+            top: -45%;
+            left: 0%;
+            padding: 10px;
+            font-family: lato;
+            word-wrap: inherit;
+            background: #222;
+            color: #fff;
+            opacity: 0;
+        }
+        a
+        {
+            position: relative;
+           color: #000;
+           left: 42%;
+           top: 20%;
+           text-decoration: none;
+           font-family: Montserrat;
+           transition: 0.3s;
+        }
+        .readmore
+        {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #C0C4C3;
+            transition: 0.3s;
+        }
+        .readmore:hover{
+            background: #222;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .readmore:hover a
+        {
+            color: #fff;
+            transition: 0.3s;
+        }
+    </style>
+    <script>
+       
+        var i,k=0,j,q,c,p,rem ="";
+        var str = "";
+        var arr = [1,2,3,4,5,6];
+        var newarr = [6];
+        var arr1 = new Array();
+        var b = 0;
+        var indx;
+        var ans = [];
+        var cipher = "";
+        j = 1;
+        p=0;
+        function setup()
+        {
+
+            str = document.getElementById("one").value;
+            str.toUpperCase;
+
+              //Creating a 2D array
+           for(i=0;i < str.length;i++)
+           {
+                arr1[i] = [];
+           }
+           for(i=0;i<=5&&b<str.length;i++)
+           {
+                for(j=0;j<=5&&b<str.length;j++)
+                {
+                    arr1[i][j] = str[k];
+                    k++;
+                    b++;
+                //   console.log("i = "+i+" "+"j = "+j+" "+arr1[i][j]);
+                }     
+           }
+            keygenerator();
+        }
+        
+        function keygenerator()
+        {
+            for(i=0;i<6;i++)
+            {
+                indx = Math.floor(Math.random() * arr.length);
+                if(arr[indx]!=0)
+                {
+                    newarr[i] = arr[indx];
+                    arr[indx] = 0;
+                // console.log(newarr[i]);
+                    k++;
+                
+                }
+                else
+                {
+                    i--;
+                }
+            }
+
+            for(j=0;j<6;j++)    
+            {
+                // console.log("j= "+ newarr[j]);
+            }
+            encryption();
+         }
+
+         function encryption()
+         {
+             j = 0;
+             b= 0;
+             q = Math.floor(str.length/6);
+           //  console.log("q = "+q);
+             for(i=0;i<6&&b<str.length;i++)
+             {
+                 console.log("newarr = "+ newarr[i]);
+                 c = 0;
+                // console.log("newarr[i] = "+newarr[i]);
+                 if(newarr[i]==6)
+                 {
+                     while(c<q)
+                     {
+                       
+                         if(arr1[c][5]!=undefined)
+                         {
+                            console.log("c = "+c+" "+"k1 = 5"+" " + arr1[c][5]);
+                            ans[p] = arr1[c][5];
+                            p++;
+                             b++;
+                         }
+                         c++;
+                     }
+                    
+                 }
+                 if(newarr[i]==1)
+                 {
+                    while(c<=q)
+                    {
+                        console.log("c = "+c+" "+"k = 0"+" " + arr1[c][0]);
+                        ans[p] = arr1[c][0];
+                        p++;
+                        c++;
+                        b++;
+                    }   
+                 }
+                 
+                 else
+                 {
+            
+                    //console.log("k ="+ newarr[i]);
+                    while(c<=q)
+                    {
+                      
+                       if(arr1[c][newarr[i]-1]!=undefined)
+                         {
+                            console.log("c = "+c+" " +"k = "+(newarr[i]-1)+" "+ arr1[c][newarr[i]-1]);
+                            ans[p] = arr1[c][newarr[i]-1];
+                            p++;
+                             b++;
+                         }
+                        c++;
+                    }
+                }
+             }
+             cipher = ans.toString();
+        for(i=0;i<cipher.length;i++)
+        {
+             cipher = cipher.replace(",","");
+         }
+        document.getElementById("two").value = cipher;
+        console.log(cipher.length);
+    }
+        //  setup();
+
+function expand()
+{
+    var x = document.getElementById('box1');
+    var y = document.getElementById('rm');
+    var z = document.getElementById('three');
+    var v = document.getElementById('four');
+    var w = document.getElementById('five');
+    if(rem%2==0)
+    {
+        x.style.height = '500px';
+        x.style.transition = '0.2s';
+        y.innerHTML = "Show Less";
+        y.style.color = '#fff';
+        z.style.top = '40%';
+        z.style.transition = '0.2s';
+        v.style.transition = '0.2s';
+        v.style.background = '#222';
+        w.style.opacity  = '1';
+        w.style.transition = '0.2s';
+        w.style.transitionDelay = '0.150s'
+        w.style.top = '-19%';
+        rem++;
+    }
+    else
+    {
+        x.style.height = '300px';
+        x.style.transition = '0.2s';
+        y.innerHTML = "Read More";
+        y.style.color = '#000';
+        z.style.top = '65%';
+        z.style.transition = '0.2s';
+        v.style.transition = '0.2s';
+        v.style.background = '';
+        w.style.opacity  = '0';
+        w.style.transition = '0.2s';
+        w.style.top = '-45%';
+        rem++;
+    }
+}
+function col1()
+{
+    var x = document.getElementById('rm');
+    x.style.color = '#fff';
+}
+function col2()
+{
+    var x = document.getElementById('rm');
+    x.style.color = '#000';
+}
+</script>
+</head>
+<body>
+    <h1>TAJ</h1>
+    <div class="box" id="box1">
+        <h2>Columnar Transposition</h2>
+        <form action="">
+             
+          <label for=""> Plain-Text : </label><input type="text" name="ptext" id="one" style="margin-left: 42px; "><br>    
+           <label for="">Cipher-Text :</label> <input type="text" name="ctext" id="two">   
+           <br>
+          
+        </form>
+      <button id="three" onclick="setup()">Encrypt</button>
+      <div class="readmore" id="four" onclick="expand()" onmouseover="col1()" onmouseout="col2()">
+        <a href="#"  id="rm"  >Read More</a>
+
+      </div>
+        <div class="rmore" id="five">
+            <p> 
+                The Columnar Transposition Cipher is a form of transposition cipher just like Rail Fence Cipher. Columnar Transposition involves writing the plaintext out in rows, and then reading the ciphertext off in columns one by one.
+                The message is written out in rows of a fixed length, and then read out again column by column, and the columns are chosen in some scrambled order.
+Width of the rows and the permutation of the columns are usually defined by a keyword.
+For example, the word HACK is of length 4 (so the rows are of length 4), and the permutation is defined by the alphabetical order of the letters in the keyword. In this case, the order would be “3 1 2 4”.
+Any spare spaces are filled with nulls or left blank or placed by a character (Example: _).
+Finally, the message is read off in columns, in the order specified by the keyword.
+            </p>
+        </div>
+    </div>
+    
+</body>
+</html>
+</body>
+</html>
