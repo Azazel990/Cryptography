@@ -15,4 +15,4 @@ It includes the following ciphers :
 
 Some Screenshots...
 
-! Tajcrypto/screenshots/Screenshot (60).png
+![](screenshots/Screenshot%20(60).png)
